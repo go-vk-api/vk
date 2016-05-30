@@ -18,7 +18,7 @@ type VK struct {
 	logFile  *os.File
 	longPoll *longPoll
 
-	Messages *messages
+	Messages *Messages
 }
 
 // RequestParams struct
@@ -115,7 +115,7 @@ func New(lang string) *VK {
 	vk.version = "5.52"
 
 	vk.longPoll = &longPoll{client: vk}
-	vk.Messages = &messages{client: vk}
+	vk.Messages = &Messages{client: vk}
 
 	return vk
 }
