@@ -4,12 +4,13 @@ import (
 	"encoding/json"
 )
 
-type messages struct {
+// Messages https://new.vk.com/dev/messages
+type Messages struct {
 	client *VK
 }
 
 // Send https://new.vk.com/dev/messages.send
-func (messages *messages) Send(params RequestParams) (int64, error) {
+func (messages *Messages) Send(params RequestParams) (int64, error) {
 	resp, err := messages.client.CallMethod("messages.send", params)
 
 	if err != nil {

@@ -26,7 +26,7 @@ and use `vk` as the package name inside the code.
 package main
 
 import (
-	"go-vk-api"
+	"github.com/urShadow/go-vk-api"
 	"log"
 	"strconv"
 )
@@ -42,15 +42,16 @@ func main() {
 
 	api.OnNewMessage(func(msg *vk.LPMessage) {
 		if msg.Flags&vk.FlagMessageOutBox == 0 {
-			api.Messages.Send(vk.RequestParams{
-				"peer_id":          strconv.FormatInt(msg.FromID, 10),
-				"message":          "Hello, World!",
-				"forward_messages": strconv.FormatInt(msg.ID, 10),
-			})
+			if msg.Text == "/hello" {
+				api.Messages.Send(vk.RequestParams{
+					"peer_id":          strconv.FormatInt(msg.FromID, 10),
+					"message":          "Hello!",
+					"forward_messages": strconv.FormatInt(msg.ID, 10),
+				})
+			}
 		}
 	})
 
 	api.RunLongPoll()
 }
-
 ```
