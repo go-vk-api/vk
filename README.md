@@ -33,6 +33,8 @@ import (
 
 func main() {
 	api := vk.New("ru")
+	// set http proxy
+	api.Proxy = "localhost:8080"
 
 	err := api.Init("TOKEN")
 

@@ -3,9 +3,11 @@ package vk
 import (
 	"encoding/json"
 	"errors"
-	"github.com/go-resty/resty"
+	"fmt"
 	"log"
 	"os"
+
+	"github.com/go-resty/resty"
 )
 
 // VK struct
@@ -19,6 +21,8 @@ type VK struct {
 	longPoll *longPoll
 
 	Messages *Messages
+
+	Proxy string
 }
 
 // RequestParams struct
@@ -29,6 +33,10 @@ func (client *VK) CallMethod(method string, params RequestParams) ([]byte, error
 	params["access_token"] = client.token
 	params["lang"] = client.lang
 	params["v"] = client.version
+
+	if client.Proxy != "" {
+		resty.SetProxy(fmt.Sprint("http://", client.Proxy))
+	}
 
 	resp, err := resty.R().
 		SetQueryParams(params).
