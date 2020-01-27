@@ -22,6 +22,8 @@ and use `vk` as the package name inside the code.
 
 ## Example
 
+[Full example with errors handling](https://github.com/go-vk-api/vk/blob/master/example/example.go)
+
 ```go
 package main
 

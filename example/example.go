@@ -33,22 +33,34 @@ func main() {
 		log.Panic(err)
 	}
 
-	for update := range stream.Updates {
-		switch data := update.Data.(type) {
-		case *lp.NewMessage:
-			if data.Text == "/hello" {
-				var sentMessageID int64
+	for {
+		select {
+		case update, ok := <-stream.Updates:
+			if !ok {
+				return
+			}
 
-				if err = client.CallMethod("messages.send", vk.RequestParams{
-					"peer_id":          data.PeerID,
-					"message":          "Hello!",
-					"forward_messages": data.ID,
-					"random_id":        0,
-				}, &sentMessageID); err != nil {
-					log.Panic(err)
+			switch data := update.Data.(type) {
+			case *lp.NewMessage:
+				if data.Text == "/hello" {
+					var sentMessageID int64
+
+					if err = client.CallMethod("messages.send", vk.RequestParams{
+						"peer_id":          data.PeerID,
+						"message":          "Hello!",
+						"forward_messages": data.ID,
+						"random_id":        0,
+					}, &sentMessageID); err != nil {
+						log.Panic(err)
+					}
+
+					log.Println(sentMessageID)
 				}
-
-				log.Println(sentMessageID)
+			}
+		case err, ok := <-stream.Errors:
+			if ok {
+				// stream.Stop()
+				log.Panic(err)
 			}
 		}
 	}
