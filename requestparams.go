@@ -8,8 +8,8 @@ import (
 // RequestParams are the params for invoking methods.
 type RequestParams map[string]interface{}
 
-// UrlValues translates the params to url.Values.
-func (params RequestParams) UrlValues() (url.Values, error) {
+// URLValues translates the params to url.Values.
+func (params RequestParams) URLValues() (url.Values, error) {
 	values := url.Values{}
 
 	for k, v := range params {

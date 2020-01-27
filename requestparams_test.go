@@ -20,7 +20,7 @@ func TestRequestParams_UrlValues(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		urlValues, err := c.in.UrlValues()
+		urlValues, err := c.in.URLValues()
 
 		if err != nil {
 			t.Error(err)

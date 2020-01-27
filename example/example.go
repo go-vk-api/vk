@@ -12,7 +12,7 @@ import (
 func main() {
 	client, err := vk.NewClientWithOptions(
 		vk.WithToken(os.Getenv("VK_ACCESS_TOKEN")),
-		vk.WithHttpClient(http.DefaultClient),
+		vk.WithHTTPClient(http.DefaultClient),
 	)
 	if err != nil {
 		log.Panic(err)
@@ -68,7 +68,7 @@ func main() {
 
 func printMe(api *vk.Client) error {
 	var users []struct {
-		Id        int64  `json:"id"`
+		ID        int64  `json:"id"`
 		FirstName string `json:"first_name"`
 		LastName  string `json:"last_name"`
 	}
@@ -79,7 +79,7 @@ func printMe(api *vk.Client) error {
 
 	me := users[0]
 
-	log.Println(me.Id, me.FirstName, me.LastName)
+	log.Println(me.ID, me.FirstName, me.LastName)
 
 	return nil
 }

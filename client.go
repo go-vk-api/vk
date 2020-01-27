@@ -23,12 +23,12 @@ type Client struct {
 
 	Token string
 
-	HttpClient httputil.RequestDoer
+	HTTPClient httputil.RequestDoer
 }
 
 // CallMethod invokes the named method and stores the result in the value pointed to by response.
 func (c *Client) CallMethod(method string, params RequestParams, response interface{}) (err error) {
-	queryParams, err := params.UrlValues()
+	queryParams, err := params.URLValues()
 	if err != nil {
 		return err
 	}
@@ -39,7 +39,7 @@ func (c *Client) CallMethod(method string, params RequestParams, response interf
 		queryParams.Set("access_token", c.Token)
 	}
 
-	rawBody, err := httputil.Post(c.HttpClient, c.BaseURL+"/"+method, queryParams)
+	rawBody, err := httputil.Post(c.HTTPClient, c.BaseURL+"/"+method, queryParams)
 	if err != nil {
 		return err
 	}
@@ -89,8 +89,8 @@ func NewClientWithOptions(options ...Option) (*Client, error) {
 		}
 	}
 
-	if client.HttpClient == nil {
-		client.HttpClient = http.DefaultClient
+	if client.HTTPClient == nil {
+		client.HTTPClient = http.DefaultClient
 	}
 
 	return client, nil

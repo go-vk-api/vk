@@ -16,10 +16,10 @@ func WithToken(token string) Option {
 	}
 }
 
-// WithHttpClient overrides the client http client with the specified one.
-func WithHttpClient(doer httputil.RequestDoer) Option {
+// WithHTTPClient overrides the client http client with the specified one.
+func WithHTTPClient(doer httputil.RequestDoer) Option {
 	return func(c *Client) error {
-		c.HttpClient = doer
+		c.HTTPClient = doer
 
 		return nil
 	}

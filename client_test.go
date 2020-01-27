@@ -19,7 +19,7 @@ func TestNewClientWithOptions(t *testing.T) {
 
 	client, err := NewClientWithOptions(
 		WithToken(token),
-		WithHttpClient(http.DefaultClient),
+		WithHTTPClient(http.DefaultClient),
 	)
 	if err != nil {
 		t.Error(err)
@@ -31,8 +31,8 @@ func TestNewClientWithOptions(t *testing.T) {
 		t.Errorf("client.Token == %q, want %q", client.Token, token)
 	}
 
-	if client.HttpClient != http.DefaultClient {
-		t.Errorf("client.HttpClient == %v, want %v (http.DefaultClient)", client.HttpClient, http.DefaultClient)
+	if client.HTTPClient != http.DefaultClient {
+		t.Errorf("client.HTTPClient == %v, want %v (http.DefaultClient)", client.HTTPClient, http.DefaultClient)
 	}
 }
 
@@ -49,7 +49,7 @@ func testDefaultClient(client *Client, t *testing.T) {
 		t.Errorf("client.BaseURL == %q, want %q", client.BaseURL, DefaultBaseURL)
 	}
 
-	if client.HttpClient == nil {
-		t.Error("client.HttpClient == nil")
+	if client.HTTPClient == nil {
+		t.Error("client.HTTPClient == nil")
 	}
 }

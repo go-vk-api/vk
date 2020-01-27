@@ -9,14 +9,15 @@ import (
 )
 
 const (
+	// DefaultVersion is a default version of the VK Long Poll API.
 	DefaultVersion = 2
-	// The waiting period. Maximum: 90.
+	// DefaultWait is a waiting period. Maximum: 90.
 	DefaultWait = 25
-	// Additional answer options.
+	// DefaultMode is an additional answer options.
 	DefaultMode = ReceiveAttachments
 )
 
-// A mode represents the additional answer options.
+// Mode represents the additional answer options.
 type Mode int64
 
 const (
@@ -24,7 +25,7 @@ const (
 	ReturnExpandedSetOfEvents    Mode = 8
 	ReturnPts                    Mode = 32
 	ReturnFriendOnlineExtraField Mode = 64
-	ReturnRandomId               Mode = 128
+	ReturnRandomID               Mode = 128
 )
 
 const (
@@ -84,12 +85,12 @@ func (lp *Longpoll) Poll(ts int64) (updates []*Update, newTS int64, err error) {
 		"wait":    lp.Wait,
 		"mode":    lp.Mode,
 		"version": lp.Version,
-	}.UrlValues()
+	}.URLValues()
 	if err != nil {
 		return
 	}
 
-	rawBody, err := httputil.Post(lp.client.HttpClient, "https://"+lp.Server, params)
+	rawBody, err := httputil.Post(lp.client.HTTPClient, "https://"+lp.Server, params)
 	if err != nil {
 		return
 	}
