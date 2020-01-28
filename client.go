@@ -33,10 +33,16 @@ func (c *Client) CallMethod(method string, params RequestParams, response interf
 		return err
 	}
 
-	queryParams.Set("v", c.Version)
-	queryParams.Set("lang", c.Lang)
+	setIfEmpty := func(param, value string) {
+		if queryParams.Get(param) == "" {
+			queryParams.Set(param, value)
+		}
+	}
+
+	setIfEmpty("v", c.Version)
+	setIfEmpty("lang", c.Lang)
 	if c.Token != "" {
-		queryParams.Set("access_token", c.Token)
+		setIfEmpty("access_token", c.Token)
 	}
 
 	rawBody, err := httputil.Post(c.HTTPClient, c.BaseURL+"/"+method, queryParams)
