@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/go-vk-api/vk"
 	lp "github.com/go-vk-api/vk/longpoll/user"
@@ -12,7 +13,7 @@ import (
 func main() {
 	client, err := vk.NewClientWithOptions(
 		vk.WithToken(os.Getenv("VK_ACCESS_TOKEN")),
-		vk.WithHTTPClient(http.DefaultClient),
+		vk.WithHTTPClient(&http.Client{Timeout: time.Second * 30}),
 	)
 	if err != nil {
 		log.Panic(err)

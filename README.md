@@ -39,7 +39,6 @@ import (
 func main() {
 	client, _ := vk.NewClientWithOptions(
 		vk.WithToken(os.Getenv("VK_ACCESS_TOKEN")),
-		vk.WithHTTPClient(http.DefaultClient),
 	)
 
 	_ = printMe(client)
