@@ -27,7 +27,7 @@ type Client struct {
 }
 
 // CallMethod invokes the named method and stores the result in the value pointed to by response.
-func (c *Client) CallMethod(method string, params RequestParams, response interface{}) (err error) {
+func (c *Client) CallMethod(method string, params RequestParams, response interface{}) error {
 	queryParams, err := params.URLValues()
 	if err != nil {
 		return err
