@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/go-vk-api/vk"
-	"github.com/go-vk-api/vk/httputil"
+	"github.com/dikey0ficial/govkapi"
+	"github.com/dikey0ficial/govkapi/httputil"
 )
 
 const (

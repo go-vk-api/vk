@@ -6,8 +6,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/go-vk-api/vk"
-	lp "github.com/go-vk-api/vk/longpoll/user"
+	"github.com/dikey0ficial/govkapi"
+	lp "github.com/dikey0ficial/govkapi/longpoll/user"
 )
 
 func main() {

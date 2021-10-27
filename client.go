@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"reflect"
 
-	"github.com/go-vk-api/vk/httputil"
+	"github.com/dikey0ficial/govkapi/httputil"
 	"github.com/pkg/errors"
 )
 
